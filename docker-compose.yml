@@ -1,0 +1,28 @@
+version: "3"
+services:
+  mongooseim:
+    image: mongooseim/mongooseim:latest
+    container_name: mr_dr_mongooseim
+    expose:
+      - 5285
+      - 8088
+      - 8089
+    volumes:
+      - ./configurations:/member
+      - mongooseim_data:/var/lib/mongooseim
+    ports:
+      - 5222:5222
+      - 4369:4369
+      - 5269:5269
+      - 5280:5280
+      - 9100:9100
+      - 5285:5285
+      - 8088:8088
+      - 8089:8089
+    hostname: mongooseim-1
+
+volumes:
+  mongooseim_data:
+
+    # ICE server
+    # docker run -it --net=host -e "MONGOOSEICE_UDP_RELAY_IP=1.1.1.1" -e "MONGOOSEICE_STUN_SECRET=secret" -e "MONGOOSEICE_UDP_REALM=myrelay" mongooseim/mongooseice:0.4.0
